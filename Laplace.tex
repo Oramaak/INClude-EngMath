@@ -11,6 +11,7 @@
 \usepackage{pgfplots}
 \usepackage{multicol}
 \usepackage{tcolorbox}
+\tcbuselibrary{skins}
 \usepackage{fancyhdr}
 \usepackage{background}
 \usepackage{array, makecell}
@@ -71,8 +72,9 @@
     \end{tikzpicture}
 \end{center}
 \vspace{0.1cm}
-\begin{tcolorbox}[colback=gray!10, colframe=black!80]
-    \textbf{บทนิยามการแปลงลาปลาซ}
+\begin{tcolorbox}[colback=gray!10, colframe=black!80, title={\textbf{บทนิยามการแปลงลาปลาซ}}, enhanced,
+    boxed title style={colframe=white,size=fbox,arc=0mm},
+    attach boxed title to top left={yshift=-\tcboxedtitleheight/2,xshift=4mm}]
     \begin{equation*}
         \laplace{f(t)} = F(s) = \int_0^\infty e^{-st} f(t) \; dt = \lim_{T \to \infty} \int_0^T e^{-st} f(t) \; dt
     \end{equation*}
@@ -135,10 +137,14 @@
                 &= \sqrt{3} \\
                 \therefore &\text{ อินทิกรัลลู่เข้าและมีค่าเท่ากับ $\sqrt{3}$}
             \end{align*}
+            \columnseprule=0.4pt
+            \noindent
             \begin{equation*}
                 \int_{0}^{1} x \ln(x) \; dx
             \end{equation*}
             \columnbreak
+            \columnseprule=0.4pt
+            \noindent
             \begin{equation*}
                 \int_0^3 \frac{1}{x^2+2x-3} \; dx
             \end{equation*}
@@ -154,7 +160,7 @@
         
         \begin{multicols}{2}
             \noindent
-            \begin{tikzpicture}[scale=0.9]
+            \begin{tikzpicture}[scale=0.95]
                 \begin{axis}[
                     axis lines=middle,
                     xlabel={$x$},
@@ -169,10 +175,10 @@
                     grid=both,
                     axis equal
                 ]
-                    \addplot[red, thick] {
+                    \addplot[red, ultra thick, samples=200, domain=-2:2] {
                         ln(abs(x)) / x^2
                     };
-                    \node at (axis cs:1.4,0.3) [red, anchor=south] {$f(x) = \frac{\ln{|x|}}{x^2}$};
+                    \node at (axis cs:1,0.2) [red, anchor=south, scale=1.7] {$\frac{\ln{|x|}}{x^2}$};
                 \end{axis}
             \end{tikzpicture}
             \columnbreak
@@ -373,8 +379,9 @@
 \pagebreak
 \section*{การแปลงฟูเรียร์}
 การแปลงฟูเรียร์ (Fourier Transform) เป็นเครื่องมือทางคณิตศาสตร์ที่ใช้ในการวิเคราะห์สัญญาณและระบบ โดยการแปลงฟังก์ชัน $f(t)$ ให้เป็นฟังก์ชัน $F(\omega)$ ซึ่งเป็นฟังก์ชันของความถี่ $\omega$ \\
-\begin{tcolorbox}
-    \textbf{บทนิยามการแปลงฟูเรียร์} \\
+\begin{tcolorbox}[colback=gray!10, colframe=black!80, title={\textbf{บทนิยามการแปลงฟูเรียร์}}, enhanced,
+    boxed title style={colframe=white,size=fbox,arc=0mm},
+    attach boxed title to top left={yshift=-\tcboxedtitleheight/2,xshift=4mm}]
     บทนิยามการแปลงฟูเรียร์นั้นมีหลายแบบ โดยที่นิยมใช้ในการวิเคราะห์สัญญาณได้นิยามไว้ดังนี้
     \begin{equation*}
         F(\omega) = \int_{-\infty}^\infty f(t) e^{-i\omega t} \; dt
