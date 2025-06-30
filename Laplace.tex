@@ -2,6 +2,7 @@
 \tracinglostchars=3 % Make it an error for letters to be missing.
 \usepackage{enumitem}
 \usepackage{babel}
+\usepackage{fontspec}
 \usepackage{unicode-math}
 \usepackage{geometry}
 \usepackage{tikz}
@@ -13,13 +14,21 @@
 \usepackage{fancyhdr}
 \usepackage{background}
 \usepackage{array, makecell}
+\usepackage{titlesec}
 \pgfplotsset{compat=1.18}
 
 \tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
 \tikzstyle{arrow} = [thick,->,>=stealth]
 
+% Center all sections and subsections
+\titleformat{\section}[block]{\Large\bfseries\filcenter}{}{0pt}{}
+\titleformat{\subsection}[block]{\large\bfseries\filcenter}{}{0pt}{}
+
 \geometry{left=1in, right=1in, top=1in, bottom=1in}
 \pagestyle{fancy}
+\fancyhf{} % Clear all header and footer fields
+\fancyhead[R]{\thepage} % Only page number on the right
+\renewcommand{\headrulewidth}{0pt} % Remove horizontal line under header
 
 \babelprovide[import, onchar=fonts ids]{english}
 \babelprovide[import, main, onchar=fonts ids]{thai}
@@ -42,11 +51,10 @@
     \node (X) [draw, shape=circle, inner sep=0, fill=black, text=white] {\strut #1};%
 }
 
-\backgroundsetup{contents=\includegraphics{kmutt-logo.png}, scale=0.7, opacity=0.03, angle=0}
+\backgroundsetup{contents=\includegraphics{INC_SVG.png}, scale=0.2, opacity=0.05, angle=0}
 
 \begin{document}
-\fancyhead[L]{\textbf{คณิตศาสตร์วิศวกรรม} (Engineering Mathematics)}
-\section{Introduction}
+\section*{Introduction}
 การแปลงลาปลาซ (Laplace Transform) เป็นเครื่องมือทางคณิตศาสตร์ที่ใช้ในการวิเคราะห์ระบบเชิงเส้นและการแก้สมการเชิงอนุพันธ์ (Differential Equation) โดยการแปลงฟังก์ชันตัวแปรจริง (ส่วนมากเป็นฟังก์ชันเวลา) $f(t)$ ให้เป็นฟังก์ชันตัวแปรเชิงซ้อน $s$ 
 \begin{center}
     \begin{tikzpicture}
@@ -70,10 +78,11 @@
     \end{equation*}
 \end{tcolorbox}
 จะเห็นได้ว่าการแปลงลาปลาซนิยามโดยใช้การอินทิกรัลไม่ตรงแบบ (Improper Integral)
-\section{Improper Integral}
+\section*{Improper Integral}
 อินทิกรัลไม่ตรงแบบ (Improper Integral) เป็นอินทิกรัลที่ทำบนช่วงที่ไม่มีขอบเขต หรือกับฟังก์ชันที่ไม่มีขอบเขต เมื่อ $f(x)$ เป็นฟังก์ชันต่อเนื่องบนช่วง $[a,b]$ 
 \begin{enumerate}[label=\arabic*.]
-    \item อินทิกรัลที่ไม่จำกัดขอบเขต (Infinite Interval)
+    \begin{tcolorbox}[colback=gray!10, colframe=black!80]
+        1. อินทิกรัลที่ไม่จำกัดขอบเขต (Infinite Interval)
         \begin{equation*}
             \lim_{b \to \infty} \int_a^b f(x) \; dx \quad \text{หรือ} \quad \lim_{a \to -\infty} \int_a^b f(x) \; dx \quad \text{หรือ} \quad \int_{-\infty}^\infty f(x) \; dx
         \end{equation*}
@@ -83,8 +92,9 @@
                 \item ลู่ออก (Diverge) เมื่อไม่เข้าข้อ a.
             \end{enumerate}
         \end{multicols}
+        \end{tcolorbox}
         \encircle{Q} จงหาว่าอินทิกรัลต่อไปนี้ลู่เข้าหรือลู่ออก ถ้าลู่เข้าจงหาค่าของอินทิกรัล \\
-        \begin{multicols}{3}
+        \begin{multicols}{2}
             \noindent
             \begin{align*}
                 \int_0^\infty e^{-x} \; dx
@@ -94,25 +104,25 @@
                 &= 1 \\
                 \therefore \text{ อินทิกรัลลู่เข้า} &\text{และมีค่าเท่ากับ 1}
             \end{align*}
+            \columnseprule=0.4pt
+            \noindent
             \begin{equation*}
                 \int_0^\infty x^2 e^{-x} \; dx
             \end{equation*}
-            \columnbreak
-            \begin{equation*}
-                \int_{-\infty}^0 \frac{e^x}{3-2e^x} \; dx
-            \end{equation*}
         \end{multicols}
         \newpage
-    \item อินทิกรัลที่มีฟังก์ชันที่ไม่ต่อเนื่อง (Discontinuous Integrand)
-        \begin{equation*}
-            \int_a^b f(x) \; dx \quad \text{โดย} \quad f(x) \to \infty \text{ ที่ } x = c
-        \end{equation*}
-        \begin{multicols}{2}
-            \begin{enumerate}[label=\alph*.]
-                \item ลู่เข้า (Converge) เมื่อลิมิตหาค่าได้และค่าจำกัด
-                \item ลู่ออก (Diverge) เมื่อไม่เข้าข้อ a.
-            \end{enumerate}
-        \end{multicols}
+        \begin{tcolorbox}[colback=gray!10, colframe=black!80]
+            2. อินทิกรัลที่มีฟังก์ชันที่ไม่ต่อเนื่อง (Discontinuous Integrand)
+            \begin{equation*}
+                \int_a^b f(x) \; dx \quad \text{โดย} \quad f(x) \to \infty \text{ ที่ } x = c
+            \end{equation*}
+            \begin{multicols}{2}
+                \begin{enumerate}[label=\alph*.]
+                    \item ลู่เข้า (Converge) เมื่อลิมิตหาค่าได้และค่าจำกัด
+                    \item ลู่ออก (Diverge) เมื่อไม่เข้าข้อ a.
+                \end{enumerate}
+            \end{multicols}
+        \end{tcolorbox}
         \encircle{Q} จงหาว่าอินทิกรัลต่อไปนี้ลู่เข้าหรือลู่ออก ถ้าลู่เข้าจงหาค่าของอินทิกรัล \\
         \begin{multicols}{3}
             \noindent
@@ -133,43 +143,46 @@
                 \int_0^3 \frac{1}{x^2+2x-3} \; dx
             \end{equation*}
         \end{multicols}
-    \item \textbf{พิเศษ:} แบบผสม (Mixed Type)
-        \begin{equation*}
-            \int_{-\infty}^\infty f(x) \; dx = \int_{-\infty}^a f(x) \; dx + \int_a^b f(x) \; dx + \int_b^\infty f(x) \; dx
-        \end{equation*}
-        โดยจะแบ่งช่วงอินทิกรัลออกเป็นช่วง ๆ ให้แต่ละช่วงมีจุดไม่ต่อเนื่องเพียงจุดเดียว \\
+        \begin{tcolorbox}[colback=gray!10, colframe=black!80]
+            3. \textbf{พิเศษ:} แบบผสม (Mixed Type)
+            \begin{equation*}
+                \int_{-\infty}^\infty f(x) \; dx = \int_{-\infty}^a f(x) \; dx + \int_a^b f(x) \; dx + \int_b^\infty f(x) \; dx
+            \end{equation*}
+            โดยจะแบ่งช่วงอินทิกรัลออกเป็นช่วง ๆ ให้แต่ละช่วงมีจุดไม่ต่อเนื่องเพียงจุดเดียว \\
+        \end{tcolorbox}
         \encircle{Q} จงหาว่าอินทิกรัลต่อไปนี้ลู่เข้าหรือลู่ออก ถ้าลู่เข้าจงหาค่าของอินทิกรัล
         
         \begin{multicols}{2}
             \noindent
-            \begin{tikzpicture}
+            \begin{tikzpicture}[scale=0.9]
                 \begin{axis}[
                     axis lines=middle,
                     xlabel={$x$},
                     ylabel={$f(x)$},
-                    xtick={-1,0,1},
-                    ytick={-1,0,1,2},
-                    xmin=-1.5, xmax=1.5,
-                    ymin=-2, ymax=3,
-                    domain=-1.5:1.5,
-                    restrict y to domain=-3:3,
+                    xtick={-2,-1,1,0,1,2},
+                    ytick={-2,-1,0,1},
+                    xmin=-2, xmax=2,
+                    ymin=-2, ymax=1,
+                    domain=-2:2,
+                    restrict y to domain=-3:2,
                     samples=100,
                     grid=both,
                     axis equal
                 ]
                     \addplot[red, thick] {
-                        exp(-x/2) / (sqrt(abs(x)) * (x + 2))
+                        ln(abs(x)) / x^2
                     };
+                    \node at (axis cs:1.4,0.3) [red, anchor=south] {$f(x) = \frac{\ln{|x|}}{x^2}$};
                 \end{axis}
             \end{tikzpicture}
             \columnbreak
             \begin{align*}
-                \int_{-1}^\infty \frac{e^{-\frac{x}{2}}}{\sqrt{|x|}(x+2)} \; dx
+                \int_{-1}^\infty \frac{\ln{|x|}}{x^2} \; dx
             \end{align*}
         \end{multicols}
     \end{enumerate}
 \pagebreak
-\section{การแปลงลาปลาซ}
+\section*{การแปลงลาปลาซ}
     จากความรู้เกี่ยวกับอินทิกรัลไม่ตรงแบบ เราสามารถใช้การแปลงลาปลาซในการวิเคราะห์ระบบเชิงเส้นได้ โดยการแปลงฟังก์ชัน $f(t)$ ให้เป็น $F(s)$ ซึ่งจะช่วยให้เราสามารถแก้สมการเชิงอนุพันธ์ได้ง่ายขึ้น \\
     \begin{tcolorbox}
     \textbf{ตัวช่วย: } Integration by Parts \\
@@ -214,11 +227,12 @@
     \end{align*}
 \end{multicols}
 \pagebreak
-\subsection{สมบัติของการแปลงลาปลาซ}
+\subsection*{สมบัติของการแปลงลาปลาซ}
 \begin{tcolorbox}
     \noindent
     \begin{enumerate}[label=\arabic*.]
         \item \textbf{สมบัติเชิงเส้น (Linearity)}
+        \vspace{0.1cm}
         \begin{equation*}
             \laplace{af(t) + bg(t)} = a \laplace{f(t)} + b \laplace{g(t)}
         \end{equation*}
@@ -238,7 +252,7 @@
             \laplace{e^{at} f(t)} = F(s - a)
         \end{equation*}
         โดยที่ $a$ เป็นค่าคงที่
-        \item \textbf{การอนุพันธ์ (Differentiation)}
+        \item \textbf{การอนุพันธ์ (Differentiation in Time Domain)}
         \begin{equation*}
             \laplace{f'(t)} = s F(s) - f(0)
         \end{equation*}
@@ -249,7 +263,7 @@
         \begin{equation*}
             \laplace{t^n f(t)} = (-1)^n \frac{d^n}{ds^n} F(s)
         \end{equation*}
-        \item \textbf{การอินทิกรัล (Integration)}
+        \item \textbf{การอินทิกรัล (Integration in Time Domain)}
         \begin{equation*}
             \laplace{\int_0^t f(\tau) \; d\tau} = \frac{F(s)}{s}
         \end{equation*}
@@ -266,9 +280,9 @@
     \noindent
     \begin{align*}
         f(t) &= 4 - 3t + 2e^{-2t} \\
-        % \laplace{f(t)} &= 4\laplace{1} - 3\laplace{t} + 2\laplace{e^{-2t}} \\
-        % &= 4 \cdot \frac{1}{s} - 3 \cdot \frac{1}{s^2} + 2 \cdot \frac{1}{s+2} \\
-        % &= \frac{4}{s} - \frac{3}{s^2} + \frac{2}{s+2}
+        \laplace{f(t)} &= 4\laplace{1} - 3\laplace{t} + 2\laplace{e^{-2t}} \\
+        &= 4 \cdot \frac{1}{s} - 3 \cdot \frac{1}{s^2} + 2 \cdot \frac{1}{s+2} \\
+        &= \frac{4}{s} - \frac{3}{s^2} + \frac{2}{s+2}
     \end{align*}
     \columnbreak
     \begin{align*}
@@ -306,7 +320,7 @@
 \begin{multicols}{2}
     \noindent
     \begin{align*}
-        f(t) &= \frac{4t+3}{t^2-5t+6} \\
+        f(t) &= cos^2(t) \\
     \end{align*}
     \columnbreak
     \begin{align*}
@@ -328,13 +342,17 @@
     \end{equation*}
 \end{multicols}
 \vspace{5cm}
-\section{การแปลงลาปลาซผกผัน}
+\section*{การแปลงลาปลาซผกผัน}
 การแปลงลาปลาซผกผัน (Inverse Laplace Transform) เป็นกระบวนการที่ใช้ในการแปลงฟังก์ชัน $F(s)$ กลับไปเป็นฟังก์ชัน $f(t)$ โดยใช้สูตรการแปลงลาปลาซผกผัน \\
 \encircle{Q} จงหาผลการแปลงลาปลาซผกผันของผลการแปลงลาปลาซต่อไปนี้
 \begin{multicols}{2}
     \noindent
     \begin{align*}
-        F(s) &= \frac{1}{s(s^2 + 4)} \\
+        F(s) &= \frac{s - 1}{s^2 - 2s + 5} \\
+        f(t) &= \ilaplace{F(s)} \\
+        &= \ilaplace{\frac{s - 1}{(s - 1)^2 + 4}} \\
+        &= e^{t} \cos(2t)
+        \text{}
     \end{align*}
     \columnbreak
     \begin{align*}
@@ -345,15 +363,15 @@
 \begin{multicols}{2}
     \noindent
     \begin{align*}
-        F(s) &= \frac{s - 1}{s^2 - 2s + 5} \\
+        F(s) &= \frac{1}{s(s^2 + 4)} \\
     \end{align*}
     \columnbreak
     \begin{align*}
-        F(s) &= \frac{-2s}{(s^2 + 4)^2} \\
+        F(s) &= -\frac{2s}{(s^2 + 4)^2} \\
     \end{align*}
 \end{multicols}
 \pagebreak
-\section{การแปลงฟูเรียร์}
+\section*{การแปลงฟูเรียร์}
 การแปลงฟูเรียร์ (Fourier Transform) เป็นเครื่องมือทางคณิตศาสตร์ที่ใช้ในการวิเคราะห์สัญญาณและระบบ โดยการแปลงฟังก์ชัน $f(t)$ ให้เป็นฟังก์ชัน $F(\omega)$ ซึ่งเป็นฟังก์ชันของความถี่ $\omega$ \\
 \begin{tcolorbox}
     \textbf{บทนิยามการแปลงฟูเรียร์} \\
@@ -376,11 +394,7 @@
     \end{align*}
     \columnbreak
     \begin{align*}
-        f(t) = 
-        \begin{cases}
-            \cos(3t) & \text{เมื่อ } t \geq 0 \\
-            0 & \text{เมื่อ } t < 0
-        \end{cases}
+        f(t) = e^{a|t|}
     \end{align*}
 \end{multicols}
 \vspace{5cm}
@@ -400,15 +414,11 @@
 \begin{multicols}{2}
     \noindent
     \begin{align*}
-        F(\omega) &= 20\frac{\sin(5\omega)}{5\omega} \\
-    \end{align*}
-    \columnbreak
-    \begin{align*}
-        F(\omega) &= \frac{e^{i\omega}}{1 + i\omega} \\
+        F(\omega) &= \frac{1}{\omega^2 + 1} \\
     \end{align*}
 \end{multicols}
 \pagebreak
-\section{Formulas}
+\section*{Formulas}
 \renewcommand{\arraystretch}{2.5}
     \begin{center}
         \begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
