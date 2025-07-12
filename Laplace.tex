@@ -383,24 +383,24 @@
     attach boxed title to top left={yshift=-\tcboxedtitleheight/2,xshift=4mm}]
     บทนิยามการแปลงฟูเรียร์นั้นมีหลายแบบ โดยที่นิยมใช้ในการวิเคราะห์สัญญาณได้นิยามไว้ดังนี้
     \begin{equation*}
-        F(\omega) = \int_{-\infty}^\infty f(t) e^{-i\omega t} \; dt
+        F(\omega) = \int_{-\infty}^\infty f(t) e^{-j\omega t} \; dt
     \end{equation*}
     \\
     \textbf{บทนิยามการแปลงฟูเรียร์ผกผัน}
     \begin{equation*}
-        f(t) = \frac{1}{2\pi} \int_{-\infty}^\infty F(\omega) e^{i\omega t} \; d\omega
+        f(t) = \frac{1}{2\pi} \int_{-\infty}^\infty F(\omega) e^{j\omega t} \; d\omega
     \end{equation*}
-    โดยที่ $i$ เป็นหน่วยจินตภาพ (Imaginary Unit) และ $\omega$ เป็นความถี่เชิงมุม (Angular Frequency, 2πf) \\
+    โดยที่ $j$ เป็นหน่วยจินตภาพ (Imaginary Unit) และ $\omega$ เป็นความถี่เชิงมุม (Angular Frequency, 2πf) \\
 \end{tcolorbox}
-\encircle{Q} จงหาผลการแปลงฟูเรียร์ของฟังก์ชันต่อไปนี้ โดยใช้บทนิยามการแปลงฟูเรียร์
+\encircle{Q} จงหาผลการแปลงฟูเรียร์ของฟังก์ชันต่อไปนี้ $f(t) = e^{a|t|}$ โดยใช้บทนิยามการแปลงฟูเรียร์
 \begin{multicols}{2}
     \noindent
     \begin{align*}
-        f(t) &= e^{-at} \\
+        f(t) &= e^{-at} \; (t > 0) \\
     \end{align*}
     \columnbreak
     \begin{align*}
-        f(t) = e^{a|t|}
+        f(t) = e^{at} \; (t < 0) \\
     \end{align*}
 \end{multicols}
 \vspace{5cm}
@@ -411,9 +411,9 @@
         \textbf{คุณสมบัติ} & \textbf{การแปลงฟูเรียร์} \\
         \hline
         \textbf{เชิงเส้น (Linearity)} & $F(a f(t) + b g(t)) = a F(f(t)) + b F(g(t))$ \\
-        \textbf{การเลื่อนเวลา (Time Shifting)} & $F(f(t - a)) = e^{-i\omega a} F(f(t))$ \\
+        \textbf{การเลื่อนเวลา (Time Shifting)} & $F(f(t - a)) = e^{-j\omega a} F(f(t))$ \\
         \textbf{การสเกล (Scaling)} & $F(f(at)) = \frac{1}{|a|} F\left(\frac{\omega}{a}\right)$ \\
-        \textbf{อนุพันธ์ (Differentiation)} & $F(f^{(n)}(t)) = (i\omega)^n F(f(t))$ \\
+        \textbf{อนุพันธ์ (Differentiation)} & $F(f^{(n)}(t)) = (j\omega)^n F(f(t))$ \\
     \end{tabular}\\
 \end{center}
 \encircle{Q} จงหาผลการแปลงฟูเรียร์ผกผันของผลการแปลงฟูเรียร์ต่อไปนี้
